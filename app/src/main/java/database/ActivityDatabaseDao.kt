@@ -11,7 +11,7 @@ import androidx.room.Update
  */
 
 @Dao
-interface activityDatabaseDao {
+interface ActivityDatabaseDao {
     @Insert
      fun insert(activity: TimeTrack)
 
@@ -46,11 +46,11 @@ interface activityDatabaseDao {
      * sorted by start time in descending order.
      */
     @Query("SELECT * FROM daily_activity_time_table ORDER BY date DESC")
-    fun getAllNights(): LiveData<List<TimeTrack>>
+    fun getAllActivities(): LiveData<List<TimeTrack>>
 
     /**
      * Selects and returns the latest day.
      */
     @Query("SELECT * FROM daily_activity_time_table ORDER BY date DESC LIMIT 1")
-     fun getTonight(): TimeTrack?
+     fun getDay(): TimeTrack?
 }
