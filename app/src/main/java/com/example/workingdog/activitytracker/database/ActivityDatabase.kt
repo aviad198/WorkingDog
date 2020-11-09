@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package database
+package com.example.workingdog.activitytracker.database
 
 import android.content.Context
 import androidx.room.Database
@@ -22,15 +22,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 /**
- * A database that stores TimeTrack information.
- * And a global method to get access to the database.
+ * A com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database that stores TimeTrack information.
+ * And a global method to get access to the com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database.
  *
  */
 @Database(entities = [TimeTrack::class], version = 1, exportSchema = false)
 abstract class ActivityDatabase : RoomDatabase() {
 
     /**
-     * Connects the database to the DAO.
+     * Connects the com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database to the DAO.
      */
     abstract val activityDatabaseDao: ActivityDatabaseDao
 
@@ -42,9 +42,9 @@ abstract class ActivityDatabase : RoomDatabase() {
      */
     companion object {
         /**
-         * INSTANCE will keep a reference to any database returned via getInstance.
+         * INSTANCE will keep a reference to any com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database returned via getInstance.
          *
-         * This will help us avoid repeatedly initializing the database, which is expensive.
+         * This will help us avoid repeatedly initializing the com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database, which is expensive.
          *
          *  The value of a volatile variable will never be cached, and all writes and
          *  reads will be done to and from the main memory. It means that changes made by one
@@ -54,12 +54,12 @@ abstract class ActivityDatabase : RoomDatabase() {
         private var INSTANCE: ActivityDatabase? = null
 
         /**
-         * Helper function to get the database.
+         * Helper function to get the com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database.
          *
-         * If a database has already been retrieved, the previous database will be returned.
-         * Otherwise, create a new database.
+         * If a com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database has already been retrieved, the previous com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database will be returned.
+         * Otherwise, create a new com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database.
          *
-         * This function is threadsafe, and callers should cache the result for multiple database
+         * This function is threadsafe, and callers should cache the result for multiple com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database
          * calls to avoid overhead.
          *
          * This is an example of a simple Singleton pattern that takes another Singleton as an
@@ -71,14 +71,14 @@ abstract class ActivityDatabase : RoomDatabase() {
          * @param context The application context Singleton, used to get access to the filesystem.
          */
         fun getInstance(context: Context): ActivityDatabase {
-            // Multiple threads can ask for the database at the same time, ensure we only initialize
+            // Multiple threads can ask for the com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database at the same time, ensure we only initialize
             // it once by using synchronized. Only one thread may enter a synchronized block at a
             // time.
             synchronized(this) {
                 // Copy the current value of INSTANCE to a local variable so Kotlin can smart cast.
                 // Smart cast is only available to local variables.
                 var instance = INSTANCE
-                // If instance is `null` make a new database instance.
+                // If instance is `null` make a new com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database instance.
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                             context.applicationContext,
@@ -91,7 +91,7 @@ abstract class ActivityDatabase : RoomDatabase() {
                             // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
                             .fallbackToDestructiveMigration()
                             .build()
-                    // Assign INSTANCE to the newly created database.
+                    // Assign INSTANCE to the newly created com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database.
                     INSTANCE = instance
                 }
                 // Return instance; smart cast to be non-null.
