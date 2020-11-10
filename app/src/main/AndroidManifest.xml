@@ -9,13 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkingDog">
+        <activity android:name=".HomeActivity2"></activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
-<!--        <activity android:name=".HomeActivity" />-->
-        <activity android:name=".MainActivityHome">
+            android:label="@string/title_activity_login" /> <!-- <activity android:name=".HomeActivity" /> -->
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
