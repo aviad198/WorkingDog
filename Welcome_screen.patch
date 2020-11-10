@@ -1,0 +1,171 @@
+Index: app/src/main/java/com/example/workingdog/MainActivityHome.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/workingdog/MainActivityHome.java	(date 1604969092395)
++++ app/src/main/java/com/example/workingdog/MainActivityHome.java	(date 1604969092395)
+@@ -0,0 +1,27 @@
++package com.example.workingdog;
++
++import android.content.Intent;
++import android.os.Bundle;
++import android.os.Handler;
++
++import androidx.annotation.Nullable;
++import androidx.appcompat.app.AppCompatActivity;
++
++
++public class MainActivityHome extends AppCompatActivity {
++    private static int SPLASH_TIME_OUT = 3000 ;
++    @Override
++    protected void onCreate(@Nullable Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_home);
++        new Handler().postDelayed(new Runnable() {
++            @Override
++            public void run() {
++                Intent homeIntent = new Intent(MainActivityHome.this, HomeActivity.class);
++                startActivity(homeIntent);
++                finish();
++            }
++        },SPLASH_TIME_OUT);
++    }
++
++}
+Index: app/src/main/res/values/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/dimens.xml	(date 1604966201488)
++++ app/src/main/res/values/dimens.xml	(date 1604966201488)
+@@ -0,0 +1,5 @@
++<resources>
++    <!-- Default screen margins, per the Android Design guidelines. -->
++    <dimen name="activity_horizontal_margin">16dp</dimen>
++    <dimen name="activity_vertical_margin">16dp</dimen>
++</resources>
+\ No newline at end of file
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/colors.xml	(revision ad6013ade5cec967ed00c942fea5960a34937270)
++++ app/src/main/res/values/colors.xml	(date 1604966009186)
+@@ -7,4 +7,5 @@
+     <color name="teal_700">#FF018786</color>
+     <color name="black">#FF000000</color>
+     <color name="white">#FFFFFFFF</color>
++    <color name="colorApp">#D544D8EC</color>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/example/workingdog/HomeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/workingdog/HomeActivity.java	(date 1604969092426)
++++ app/src/main/java/com/example/workingdog/HomeActivity.java	(date 1604969092426)
+@@ -0,0 +1,14 @@
++package com.example.workingdog;
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import android.os.Bundle;
++
++public class HomeActivity extends AppCompatActivity {
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_login);
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_home.xml	(date 1604966009157)
++++ app/src/main/res/layout/activity_home.xml	(date 1604966009157)
+@@ -0,0 +1,49 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:paddingLeft="16dp"
++    android:paddingTop="16dp"
++    android:paddingRight="16dp"
++    android:paddingBottom="16dp"
++    tools:context=".HomeActivity">
++
++    <RelativeLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:background="@color/colorApp"
++        tools:layout_editor_absoluteX="16dp"
++        tools:layout_editor_absoluteY="16dp">
++
++        <ImageView
++            android:id="@+id/imageView2"
++            android:layout_width="350dp"
++            android:layout_height="354dp"
++            android:layout_above="@+id/welcomeText"
++            android:layout_alignParentStart="true"
++            android:layout_alignParentEnd="true"
++            android:layout_marginStart="15dp"
++            android:layout_marginEnd="14dp"
++            android:layout_marginBottom="63dp"
++            app:srcCompat="@drawable/stillworking" />
++
++        <TextView
++            android:id="@+id/welcomeText"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_alignParentStart="true"
++            android:layout_alignParentEnd="true"
++            android:layout_alignParentBottom="true"
++            android:layout_marginStart="0dp"
++            android:layout_marginEnd="0dp"
++            android:layout_marginBottom="127dp"
++            android:text="WELCOME TO WORKING DOG"
++            android:textAlignment="center"
++            android:textColor="#0B4325"
++            android:textSize="35sp" />
++
++    </RelativeLayout>
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision ad6013ade5cec967ed00c942fea5960a34937270)
++++ app/src/main/AndroidManifest.xml	(date 1604967873572)
+@@ -9,13 +9,17 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.WorkingDog">
+-        <activity android:name=".activitytracker.MainActivity">
++        <activity
++            android:name=".ui.login.LoginActivity"
++            android:label="@string/title_activity_login"></activity>
++<!--        <activity android:name=".HomeActivity" />-->
++        <activity android:name=".MainActivityHome">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+-
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
++
+         <meta-data
+             android:name="preloaded_fonts"
+             android:resource="@array/preloaded_fonts" />
