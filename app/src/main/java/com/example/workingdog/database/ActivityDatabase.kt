@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.workingdog.activitytracker.database
+package com.example.workingdog.database
 
 import android.content.Context
 import androidx.room.Database

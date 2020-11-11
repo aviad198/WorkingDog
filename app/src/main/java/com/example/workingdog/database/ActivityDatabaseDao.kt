@@ -1,4 +1,4 @@
-package com.example.workingdog.activitytracker.database
+package com.example.workingdog.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

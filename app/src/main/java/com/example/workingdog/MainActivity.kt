@@ -1,4 +1,4 @@
-package com.example.workingdog.activitytracker
+package com.example.workingdog
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
