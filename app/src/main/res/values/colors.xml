@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorApp">#D544D8EC</color>
+    <color name="colorBackgroundButton">#F4EAEA</color>
 </resources>
