@@ -56,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
-//                Intent homeIntent = new Intent(HomeActivity.this, LoginActivity.class);
+//                Intent homeIntent = new Intent(HomeActivity.this, MainActivity.class);
 //                startActivity(homeIntent);
 //                finish();
 //            }
@@ -64,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void openHomeActivity2() {
-        Intent intent = new Intent(HomeActivity.this, HomeActivity2.class);
+        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
         startActivity(intent);
     }
 }
