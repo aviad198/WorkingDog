@@ -15,4 +15,41 @@
     <string name="SummaryApp">"Gain back control of your life. Working Dog will help you to balance the time you out to work so that you wont be over stressed"</string>
     <string name="titleWelcome">Control your working-life balance</string>
     <string name="LetsGetStarted">Lets Get Started</string>
+    <string name="first_let_us_know_you">First, let us know you</string>
+    <string name="what_s_your_job">What\'s Your Job ?</string>
+    <string name="how_many_hours_do_you_work">How many hours do you work?</string>
+    <string name="done">Done!</string>
+    <string-array name="numbers0_24">
+        <item>Select a number...</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+    </string-array>
+    <string-array name="jobs">
+        <item>Select a job...</item>
+        <item>Developer</item>
+        <item>Engineer</item>
+    </string-array>
 </resources>

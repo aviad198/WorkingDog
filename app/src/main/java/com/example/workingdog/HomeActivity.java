@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.workingdog.ui.login.LoginActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -36,12 +35,10 @@ public class HomeActivity extends AppCompatActivity {
         bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
         //hooks
         image = findViewById(R.id.imageLetsDoThis);
-       // welcomeText = findViewById(R.id.titleWelcome);
         titel = findViewById(R.id.titleWelcome);
         subtitle = findViewById(R.id.summaryApp);
 
         image.setAnimation(bottomAnim);
-       // welcomeText.setAnimation(topAnim);
         titel.setAnimation(topAnim);
         subtitle.setAnimation(topAnim);
 
