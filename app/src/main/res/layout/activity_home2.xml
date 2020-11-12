@@ -4,27 +4,117 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".HomeActivity2">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorApp"
+        android:padding="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="16dp">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="350dp"
-            android:layout_height="354dp"
+        <TextView
+            android:id="@+id/titelHome2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="@string/first_let_us_know_you"
+            android:textSize="35sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/q1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titelHome2"
+            android:paddingTop="20dp"
+            android:text="@string/what_s_your_job"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+
+        <Spinner
+            android:id="@+id/job_spinner"
+            android:layout_width="195dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/q1"
+            android:autofillHints="select job"
+            android:background="@drawable/rounded_corners"
+            android:entries="@array/jobs"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/q2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/job_spinner"
+            android:paddingTop="20dp"
+            android:text="@string/how_many_hours_do_you_work"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+
+        <Spinner
+            android:id="@+id/num0_24_spinner"
+            android:layout_width="195dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/q2"
+            android:background="@drawable/rounded_corners"
+            android:entries="@array/numbers0_24"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/q3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/num0_24_spinner"
+            android:paddingTop="20dp"
+            android:text="q3 ?"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+
+        <Spinner
+            android:id="@+id/q3_spinner"
+            android:layout_width="195dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/q3"
+            android:background="@drawable/rounded_corners"
+            android:entries="@array/numbers0_24"
+            android:textColor="@color/black"/>
+
+<!--        <SeekBar-->
+<!--            android:id="@+id/seekBar"-->
+<!--            style="@style/Widget.AppCompat.SeekBar.Discrete"-->
+<!--            android:layout_width="315dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_below="@id/q3_spinner"-->
+<!--            android:layout_marginTop="41dp"-->
+<!--            android:background="@drawable/rounded_corners"-->
+<!--            android:max="24"-->
+<!--            android:min="0"-->
+<!--            android:progress="8" />-->
+
+        <Button
+            android:id="@+id/buttonDone"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="14dp"
-            android:layout_marginBottom="182dp"
-            app:srcCompat="@drawable/stillworking" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="70dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_corners"
+            android:text="@string/done"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
 
 
     </RelativeLayout>
