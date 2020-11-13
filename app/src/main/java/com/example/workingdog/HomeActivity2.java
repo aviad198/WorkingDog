@@ -2,6 +2,7 @@ package com.example.workingdog;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -46,7 +47,8 @@ public class HomeActivity2 extends AppCompatActivity  {
         buttonDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity2.this,"Your Text!!",Toast.LENGTH_LONG).show();
+              Intent intent = new Intent(HomeActivity2.this, MainActivity.class);
+               startActivity(intent);
 
             }
         });
