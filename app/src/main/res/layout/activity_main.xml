@@ -1,53 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-        <!-- Data to make available to the XML via data binding. In this case,
-                   the whole ViewModel, so that we can access the LiveData,
-                   click handlers, and state variables. -->
-        <data>
-                <variable
-                    name="activityTrackerViewModel"
-                    type="com.example.workingdog.activitytracker.ActivityTrackerViewModel" />
-        </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/ConstraintLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_dark"
-    tools:context=".MainActivity">
 
 
-        <Button
-            android:id="@+id/TimeBtn"
-            android:layout_width="246dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="8dp"
-            android:onClick="@{() ->  activityTrackerViewModel.startStopTracking()}"
-            android:text="Start/Stop"
-            android:textColor="#000000"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.109" />
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="272dp"
-            android:layout_height="355dp"
-            android:text="@{activityTrackerViewModel.daysString}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.601" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/navigation"
+            />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</merge>

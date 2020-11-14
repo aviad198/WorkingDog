@@ -9,7 +9,6 @@ data class TimeTrack(
         @PrimaryKey(autoGenerate = true)
         var date: Long = 0L,
 
-        @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "start_time_milli")
         val startTimeMilli: Long = System.currentTimeMillis(),
 

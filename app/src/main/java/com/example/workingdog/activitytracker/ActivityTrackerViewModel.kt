@@ -59,7 +59,7 @@ class ActivityTrackerViewModel(
         fun onStartTracking() {
                 uiScope.launch {
                         val newDay = TimeTrack()
-                        database.insert(newDay)
+                        insert(newDay)
                         today.value = getTodayFromDatabase()
                 }
                 }

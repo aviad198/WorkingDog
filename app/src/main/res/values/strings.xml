@@ -75,6 +75,8 @@
     <string name="quality"><![CDATA[<b>Quality:</b>]]></string>
     <string name="hours_slept"><![CDATA[<b>Hours:Minutes:Seconds</b>]]></string>
 
+    <!-- App title and fragment titles -->
 
+    <string name="activity_tracker_fragment">ActivityTrackerFragment</string>
 
 </resources>
