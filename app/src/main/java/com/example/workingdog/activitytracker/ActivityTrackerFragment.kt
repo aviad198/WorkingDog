@@ -27,12 +27,12 @@ class ActivityTrackerFragment : Fragment() {
      */
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                     savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View? {
 
 
-      // Get a reference to the binding object and inflate the fragment views.
+        // Get a reference to the binding object and inflate the fragment views.
         val binding: FragmentActivityTrackerBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_activity_tracker, container, false)
+            inflater, R.layout.fragment_activity_tracker, container, false)
 
         val application = requireNotNull(this.activity).application
         // Create an instance of the ViewModel Factory.
@@ -41,13 +41,14 @@ class ActivityTrackerFragment : Fragment() {
         // Get a reference to the ViewModel associated with this fragment.
 
         val activityTrackerViewModel =
-                ViewModelProvider(
-                        this, viewModelFactory).get(ActivityTrackerViewModel::class.java)
+            ViewModelProvider(
+                this, viewModelFactory).get(ActivityTrackerViewModel::class.java)
 
         // To use the View Model with data binding, you have to explicitly
         // give the binding object a reference to it.
         binding.activityTrackerViewModel = activityTrackerViewModel
-       binding.lifecycleOwner = this
+        binding.lifecycleOwner = this
+
         return binding.root
     }
 }

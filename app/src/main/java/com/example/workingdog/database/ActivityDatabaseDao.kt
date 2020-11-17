@@ -1,10 +1,12 @@
 package com.example.workingdog.database
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import java.sql.Date
 
 /**
  * Defines methods for using the TimeTrack class with Room.
@@ -13,7 +15,7 @@ import androidx.room.Update
 @Dao
 interface ActivityDatabaseDao {
     @Insert
-     fun insert(activity: TimeTrack)
+    suspend fun insert(activity: TimeTrack)
 
     /**
      * When updating a row with a value already set in a column,
@@ -22,15 +24,15 @@ interface ActivityDatabaseDao {
      * @param activity new value to write
      */
     @Update
-     fun update(activity: TimeTrack)
+    suspend fun update(activity: TimeTrack)
 
     /**
      * Selects and returns the row that matches the supplied start time, which is our key.
      *
      * @param key startTimeMilli to match
      */
-    @Query("SELECT * from daily_activity_time_table WHERE date = :key")
-     fun get(key: Long): TimeTrack?
+    @Query("SELECT * from daily_activity_time_table WHERE activityId = :key")
+    suspend fun get(key: Long): TimeTrack?
 
     /**
      * Deletes all values from the table.
@@ -38,19 +40,30 @@ interface ActivityDatabaseDao {
      * This does not delete the table, only its contents.
      */
     @Query("DELETE FROM daily_activity_time_table")
-     fun clear()
+     suspend fun clear()
 
     /**
      * Selects and returns all rows in the table,
      *
      * sorted by start time in descending order.
      */
-    @Query("SELECT * FROM daily_activity_time_table ORDER BY date DESC")
+    @Query("SELECT * FROM daily_activity_time_table ORDER BY activityId DESC")
     fun getAllActivities(): LiveData<List<TimeTrack>>
 
     /**
      * Selects and returns the latest day.
      */
-    @Query("SELECT * FROM daily_activity_time_table ORDER BY date DESC LIMIT 1")
-     fun getDay(): TimeTrack?
+    @Query("SELECT * FROM daily_activity_time_table ORDER BY activityId DESC LIMIT 1")
+    suspend fun getToday(): TimeTrack?
+
+//    @SuppressLint("SimpleDateFormat")
+//    fun convertLongToDateOnlyString(systemTime: Long): java.util.Date {
+//        return java.util.Date(systemTime)
+//    }
+
+//    @Query("SELECT datetime(start_time, 'unixepoch') FROM daily_activity_time_table ORDER BY activityId DESC LIMIT 1")
+//    suspend fun getTodayDate(): TimeTrack?
+
+//    @Query("SELECT SUM(end_time-start_time) from daily_activity_time_table where DATE(start_time) = date('now') ")
+//    fun getTodayRecord(): List<Long?>?
 }
