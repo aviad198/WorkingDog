@@ -19,6 +19,7 @@ public class HomeActivity2 extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home2);
+
 //        Spinner spinnerQ1,spinnerQ2,spinnerQ3;
 //        String selectedS1 ,selectedS2 ,selectedS3;
 
@@ -47,7 +48,7 @@ public class HomeActivity2 extends AppCompatActivity  {
         buttonDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent = new Intent(HomeActivity2.this, MainActivity.class);
+              Intent intent = new Intent(HomeActivity2.this, HomeActivity3.class);
                startActivity(intent);
 
             }
