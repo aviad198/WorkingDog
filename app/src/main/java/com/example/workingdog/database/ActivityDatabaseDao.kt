@@ -7,6 +7,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import java.sql.Date
+import java.util.*
 
 /**
  * Defines methods for using the TimeTrack class with Room.
@@ -14,6 +15,7 @@ import java.sql.Date
 
 @Dao
 interface ActivityDatabaseDao {
+
     @Insert
     suspend fun insert(activity: TimeTrack)
 
@@ -56,6 +58,8 @@ interface ActivityDatabaseDao {
     @Query("SELECT * FROM daily_activity_time_table ORDER BY activityId DESC LIMIT 1")
     suspend fun getToday(): TimeTrack?
 
+
+
 //    @SuppressLint("SimpleDateFormat")
 //    fun convertLongToDateOnlyString(systemTime: Long): java.util.Date {
 //        return java.util.Date(systemTime)
@@ -64,6 +68,10 @@ interface ActivityDatabaseDao {
 //    @Query("SELECT datetime(start_time, 'unixepoch') FROM daily_activity_time_table ORDER BY activityId DESC LIMIT 1")
 //    suspend fun getTodayDate(): TimeTrack?
 
-//    @Query("SELECT SUM(end_time-start_time) from daily_activity_time_table where DATE(start_time) = date('now') ")
-//    fun getTodayRecord(): List<Long?>?
+//    @Query("SELECT SUM(end_time-start_time) from daily_activity_time_table where start_time > date('now') ")
+//    fun getTodayRecord(): Long
+
+    @Query("SELECT SUM(end_time-start_time) FROM daily_activity_time_table WHERE start_time BETWEEN :from AND :to")
+    suspend fun getAllByDate(from: Calendar,to: Calendar): Double?
+
 }

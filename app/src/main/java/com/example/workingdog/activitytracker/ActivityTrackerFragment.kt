@@ -1,6 +1,7 @@
 package com.example.workingdog.activitytracker
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.example.workingdog.R
 import com.example.workingdog.database.ActivityDatabase
 import com.example.workingdog.databinding.ActivityMainBinding
 import com.example.workingdog.databinding.FragmentActivityTrackerBinding
+import java.util.*
 
 
 /**
@@ -49,6 +51,11 @@ class ActivityTrackerFragment : Fragment() {
         binding.activityTrackerViewModel = activityTrackerViewModel
         binding.lifecycleOwner = this
 
+        val todayStart = Calendar.getInstance()
+        todayStart.set(3,0)
+        todayStart.set(4,0)
+        todayStart.set(5,0)
+        Log.i("today start", todayStart.toString())
         return binding.root
     }
 }

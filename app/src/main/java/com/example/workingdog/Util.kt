@@ -7,6 +7,7 @@ import android.text.Html
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
 import com.example.workingdog.database.TimeTrack
+import java.sql.Time
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,6 +52,16 @@ fun convertLongToDateOnlyString(systemTime: Long): Date {
     return Date(systemTime)
 }
 
+//
+//fun updateDay(days: List<TimeTrack>): Double{
+//    val todayTime =0.0;
+//    days.forEach{
+//        if(convertLongToDateOnlyString((it.startTimeMilli))==(Date()))
+//        todayTime.plus(it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60 / 60) }
+//
+//    return todayTime
+//}
+
 /**
  * Takes a list of SleepNights and converts and formats it into one string for display.
  *
@@ -64,29 +75,29 @@ fun convertLongToDateOnlyString(systemTime: Long): Date {
  * @return  Spanned - An interface for text that has formatting attached to it.
  *           See: https://developer.android.com/reference/android/text/Spanned
  */
-//
-//fun formatDays(days: List<TimeTrack>, resources: Resources): Spanned {
-//    val sb = StringBuilder()
-//    sb.apply {
-//        append(resources.getString(R.string.title))
-//        days.forEach {
-//            append("<br>")
-//            append(resources.getString(R.string.start_time))
-//            append("\t${convertLongToDateString(it.startTimeMilli)}<br>")
-//            if (it.endTimeMilli != it.startTimeMilli) {
-//                append(resources.getString(R.string.end_time))
-//               // append("\t${convertLongToDateString(it.endTimeMilli)}<br>")
-//                append(resources.getString(R.string.quality))
-//                append("\t${convertNumericQualityToString(it.sleepQuality, resources)}<br>")
-//                append(resources.getString(R.string.hours_slept))
-//                // Hours
-//                append("\t ${it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60 / 60}:")
-//                // Minutes
-//                append("${it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60}:")
-//                // Seconds
-//                append("${it.endTimeMilli.minus(it.startTimeMilli) / 1000}<br><br>")
-//            }
-//        }
-//    }
-//    return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
-//}
+
+/*fun formatDays(days: List<TimeTrack>, resources: Resources): Spanned {
+    val sb = StringBuilder()
+    sb.apply {
+        append(resources.getString(R.string.title))
+        days.forEach {
+            append("<br>")
+            append(resources.getString(R.string.start_time))
+            append("\t${convertLongToDateString(it.startTimeMilli)}<br>")
+            if (it.endTimeMilli != it.startTimeMilli) {
+                append(resources.getString(R.string.end_time))
+               // append("\t${convertLongToDateString(it.endTimeMilli)}<br>")
+                append(resources.getString(R.string.quality))
+                append("\t${convertNumericQualityToString(it.sleepQuality, resources)}<br>")
+                append(resources.getString(R.string.hours_slept))
+                // Hours
+                append("\t ${it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60 / 60}:")
+                // Minutes
+                append("${it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60}:")
+                // Seconds
+                append("${it.endTimeMilli.minus(it.startTimeMilli) / 1000}<br><br>")
+            }
+        }
+    }
+    return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
+}*/

@@ -2,19 +2,21 @@ package com.example.workingdog.activitytracker
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.workingdog.convertLongToDateOnlyString
 import com.example.workingdog.database.ActivityDatabaseDao
 import com.example.workingdog.database.Converters
 import com.example.workingdog.database.TimeTrack
 
 
+
+
 import kotlinx.coroutines.*
 import java.sql.Date
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
+import java.util.*
 
 /**
  * ViewModel for ActivityTrackerFragment.
@@ -24,7 +26,7 @@ class ActivityTrackerViewModel(
     application: Application) : AndroidViewModel(application) {
 
     var startTracking = true
-
+    var todayTimeA = 0.0
     var localDateTime = LocalDateTime.now()
     private var today = MutableLiveData<TimeTrack?>()
 
@@ -35,9 +37,15 @@ class ActivityTrackerViewModel(
     /**
      * Converted days to Spanned for displaying.
      */
-//    val daysString = Transformations.map(days) { days ->
-//        formatDays(days, application.resources)
+/*    val daysString = Transformations.map(days) { days ->
+        formatDays(days, application.resources)
+    }*/
+
+//        val dayTime = Transformations.map(days) { days ->
+//        updateDay(days)
 //    }
+
+
 
     init {
         initializeToday()
@@ -87,6 +95,8 @@ class ActivityTrackerViewModel(
         else{
             onStopTracking()
             startTracking = true }
+
+      //  Log.i("Day time is:", ""+dayTime)
     }
 
 
@@ -115,13 +125,21 @@ class ActivityTrackerViewModel(
             val oldDay = today.value ?: return@launch
 
             // Update the day in the database to add the end time.
-            oldDay.endTimeMilli =  Date(System.currentTimeMillis())
-            Log.i("Tag", oldDay.endTimeMilli.toString())
-            Log.i("tag2", LocalDateTime.now().toString())
+            oldDay.endTimeMilli = Calendar.getInstance()
+            //Log.i("Tag", oldDay.endTimeMilli.toString())
+           // Log.i("tag2", LocalDateTime.now().toString())
             //Log.i("tag2", ""+ convertLongToDateOnlyString(oldDay.endTimeMilli))
            // Log.i("tag2", ""+ database.getTodayDate().toString())
+            val todayStart = Calendar.getInstance()
+            todayStart.set(Calendar.HOUR_OF_DAY,6)
+            val tomorrowStart = Calendar.getInstance()
+            tomorrowStart.set(Calendar.DATE,tomorrowStart.get(Calendar.DATE+1))
+            tomorrowStart.set(Calendar.HOUR_OF_DAY,6)
 
             update(oldDay)
+
+            todayTimeA = database.getAllByDate(todayStart,tomorrowStart)!!
+            println(todayTimeA/ 1000 / 60 / 60)
         }
     }
 

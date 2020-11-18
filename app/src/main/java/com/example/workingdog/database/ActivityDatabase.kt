@@ -39,6 +39,19 @@ abstract class ActivityDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: ActivityDatabase? = null
 
+
+
+        class Converters {
+            @TypeConverter
+            fun fromTimestamp(value: Long?): Date? {
+                return value?.let { Date(it) }
+            }
+
+            @TypeConverter
+            fun dateToTimestamp(date: Date?): Long? {
+                return date?.time?.toLong()
+            }
+        }
         /**
          * Helper function to get the database.
          *
