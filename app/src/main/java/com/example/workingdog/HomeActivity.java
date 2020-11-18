@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                openHomeActivity2();
+                openHomeActivity3();
             }
         });
 
@@ -60,9 +60,10 @@ public class HomeActivity extends AppCompatActivity {
 //        },SPLASH_TIME_OUT);
     }
 
-    private void openHomeActivity2() {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void openHomeActivity3() {
+        Intent intent = new Intent(this, HomeActivity3.class);
 
         startActivity(intent);
+        finish();
     }
 }

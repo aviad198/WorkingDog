@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Working Dog</string>
     <string name="Background" />
-   
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
@@ -15,9 +15,9 @@
     <string name="SummaryApp">"Gain back control of your life. Working Dog will help you to balance the time you out to work so that you wont be over stressed"</string>
     <string name="titleWelcome">Control your working-life balance</string>
     <string name="LetsGetStarted">Lets Get Started</string>
+    <string name="StartStop">Start/Stop</string>
 
-  
- 
+
     <string name="first_let_us_know_you">First, let us know you</string>
     <string name="what_s_your_job">What\'s Your Job ?</string>
     <string name="how_many_hours_do_you_work">How many hours do you work?</string>
@@ -55,7 +55,6 @@
         <item>Developer</item>
         <item>Engineer</item>
     </string-array>
-
 
 
     <!-- Day quality strings -->

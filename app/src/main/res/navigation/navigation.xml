@@ -10,7 +10,14 @@
         android:id="@+id/activity_tracker_fragment"
         android:name="com.example.workingdog.activitytracker.ActivityTrackerFragment"
         android:label="@string/activity_tracker_fragment"
-        tools:layout="@layout/fragment_activity_tracker"/>
+        tools:layout="@layout/fragment_activity_tracker">
+<!--        <action-->
+<!--            android:id="@+id/action_sleepTrackerFragment_to_sleepQualityFragment"-->
+<!--            app:destination="@id/sleep_quality_fragment"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:popEnterAnim="@anim/slide_in_right" />-->
+    </fragment>
+
 
     <!--    <fragment-->
 <!--        android:id="@+id/sleep_quality_fragment"-->
