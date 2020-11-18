@@ -1,6 +1,7 @@
 package com.example.workingdog.activitytracker
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.example.workingdog.R
 import com.example.workingdog.database.ActivityDatabase
 import com.example.workingdog.databinding.ActivityMainBinding
 import com.example.workingdog.databinding.FragmentActivityTrackerBinding
+import java.util.*
 
 
 /**
@@ -27,12 +29,12 @@ class ActivityTrackerFragment : Fragment() {
      */
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                     savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View? {
 
 
-      // Get a reference to the binding object and inflate the fragment views.
+        // Get a reference to the binding object and inflate the fragment views.
         val binding: FragmentActivityTrackerBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_activity_tracker, container, false)
+            inflater, R.layout.fragment_activity_tracker, container, false)
 
         val application = requireNotNull(this.activity).application
         // Create an instance of the ViewModel Factory.
@@ -41,13 +43,19 @@ class ActivityTrackerFragment : Fragment() {
         // Get a reference to the ViewModel associated with this fragment.
 
         val activityTrackerViewModel =
-                ViewModelProvider(
-                        this, viewModelFactory).get(ActivityTrackerViewModel::class.java)
+            ViewModelProvider(
+                this, viewModelFactory).get(ActivityTrackerViewModel::class.java)
 
         // To use the View Model with data binding, you have to explicitly
         // give the binding object a reference to it.
         binding.activityTrackerViewModel = activityTrackerViewModel
-       binding.lifecycleOwner = this
+        binding.lifecycleOwner = this
+
+        val todayStart = Calendar.getInstance()
+        todayStart.set(3,0)
+        todayStart.set(4,0)
+        todayStart.set(5,0)
+        Log.i("today start", todayStart.toString())
         return binding.root
     }
 }

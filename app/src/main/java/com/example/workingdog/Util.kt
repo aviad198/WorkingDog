@@ -7,7 +7,9 @@ import android.text.Html
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
 import com.example.workingdog.database.TimeTrack
+import java.sql.Time
 import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * These functions create a formatted string that can be set in a TextView.
@@ -45,6 +47,21 @@ fun convertLongToDateString(systemTime: Long): String {
         .format(systemTime).toString()
 }
 
+@SuppressLint("SimpleDateFormat")
+fun convertLongToDateOnlyString(systemTime: Long): Date {
+    return Date(systemTime)
+}
+
+//
+//fun updateDay(days: List<TimeTrack>): Double{
+//    val todayTime =0.0;
+//    days.forEach{
+//        if(convertLongToDateOnlyString((it.startTimeMilli))==(Date()))
+//        todayTime.plus(it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60 / 60) }
+//
+//    return todayTime
+//}
+
 /**
  * Takes a list of SleepNights and converts and formats it into one string for display.
  *
@@ -59,7 +76,7 @@ fun convertLongToDateString(systemTime: Long): String {
  *           See: https://developer.android.com/reference/android/text/Spanned
  */
 
-fun formatDays(days: List<TimeTrack>, resources: Resources): Spanned {
+/*fun formatDays(days: List<TimeTrack>, resources: Resources): Spanned {
     val sb = StringBuilder()
     sb.apply {
         append(resources.getString(R.string.title))
@@ -69,7 +86,7 @@ fun formatDays(days: List<TimeTrack>, resources: Resources): Spanned {
             append("\t${convertLongToDateString(it.startTimeMilli)}<br>")
             if (it.endTimeMilli != it.startTimeMilli) {
                 append(resources.getString(R.string.end_time))
-                append("\t${convertLongToDateString(it.endTimeMilli)}<br>")
+               // append("\t${convertLongToDateString(it.endTimeMilli)}<br>")
                 append(resources.getString(R.string.quality))
                 append("\t${convertNumericQualityToString(it.sleepQuality, resources)}<br>")
                 append(resources.getString(R.string.hours_slept))
@@ -82,9 +99,5 @@ fun formatDays(days: List<TimeTrack>, resources: Resources): Spanned {
             }
         }
     }
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    }
-}
+    return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
+}*/

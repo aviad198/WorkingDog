@@ -3,9 +3,8 @@
 package com.example.workingdog.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import java.sql.Date
 
 /**
  * A database that stores TimeTrack information.
@@ -13,6 +12,7 @@ import androidx.room.RoomDatabase
  *
  */
 @Database(entities = [TimeTrack::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class ActivityDatabase : RoomDatabase() {
 
     /**
@@ -39,6 +39,19 @@ abstract class ActivityDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: ActivityDatabase? = null
 
+
+
+        class Converters {
+            @TypeConverter
+            fun fromTimestamp(value: Long?): Date? {
+                return value?.let { Date(it) }
+            }
+
+            @TypeConverter
+            fun dateToTimestamp(date: Date?): Long? {
+                return date?.time?.toLong()
+            }
+        }
         /**
          * Helper function to get the database.
          *
@@ -67,16 +80,16 @@ abstract class ActivityDatabase : RoomDatabase() {
                 // If instance is `null` make a new database instance.
                 if (instance == null) {
                     instance = Room.databaseBuilder(
-                            context.applicationContext,
-                            ActivityDatabase::class.java,
-                            "activity_history_database"
+                        context.applicationContext,
+                        ActivityDatabase::class.java,
+                        "activity_history_database"
                     )
-                            // Wipes and rebuilds instead of migrating if no Migration object.
-                            // Migration is not part of this lesson. You can learn more about
-                            // migration with Room in this blog post:
-                            // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
-                            .fallbackToDestructiveMigration()
-                            .build()
+                        // Wipes and rebuilds instead of migrating if no Migration object.
+                        // Migration is not part of this lesson. You can learn more about
+                        // migration with Room in this blog post:
+                        // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
+                        .fallbackToDestructiveMigration()
+                        .build()
                     // Assign INSTANCE to the newly created com.example.workingdog.com.example.workingdog.activitytracker.activitytracker.database.
                     INSTANCE = instance
                 }
@@ -84,5 +97,6 @@ abstract class ActivityDatabase : RoomDatabase() {
                 return instance
             }
         }
+
     }
 }

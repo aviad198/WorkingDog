@@ -1,20 +1,47 @@
 package com.example.workingdog.database
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.example.workingdog.convertLongToDateOnlyString
+import com.example.workingdog.convertLongToDateString
+import java.sql.Date
+import java.sql.Timestamp
+import java.time.*
+import java.time.format.DateTimeFormatter
+import java.util.*
+
 
 @Entity(tableName = "daily_activity_time_table")
 data class TimeTrack(
+
+//        @PrimaryKey
+//        val id: Int,
+//        val startTime: Long,
+//        val endTime: Long,
+//        val sleepQuality: Int = -1
+//)
+//
+//{
+//        val totalTime: Long
+//                get() = endTime - startTime
+//
+//        // maybe this as well, gets the Local Date as LocalDate in case you want to filter by that
+//        val startDate: LocalDate
+//                get() = Instant.ofEpochSecond(startTime)
+//}
         @PrimaryKey(autoGenerate = true)
-        var date: Long = 0L,
+        var activityId: Long = 0L,
 
-        @ColumnInfo(name = "start_time_milli")
-        val startTimeMilli: Long = System.currentTimeMillis(),
+        @ColumnInfo(name = "start_time")
 
-        @ColumnInfo(name = "end_time_milli")
-        var endTimeMilli: Long = startTimeMilli,
+        val startTimeMilli: Calendar? = Calendar.getInstance(),
+
+        @ColumnInfo(name = "end_time")
+        var endTimeMilli: Calendar? = startTimeMilli,
 
         @ColumnInfo(name = "quality_rating")
         var sleepQuality: Int = -1
-)
+){
+        override fun toString(): String {
+                return "${startTimeMilli.toString()} ${endTimeMilli.toString()}"
+        }
+}
