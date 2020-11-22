@@ -12,7 +12,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="SummaryApp">"Gain back control of your life. Working Dog will help you to balance the time you out to work so that you wont be over stressed"</string>
+    <string name="SummaryApp">"Gain back control of your life. Working Dog will help you to balance your Working Life balance or as we like to call it WLB. gain points, compare with others and live your life!"</string>
     <string name="titleWelcome">Control your working-life balance</string>
     <string name="LetsGetStarted">Lets Get Started</string>
     <string name="StartStop">Start/Stop</string>

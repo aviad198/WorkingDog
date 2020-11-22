@@ -2,23 +2,22 @@ package com.example.workingdog.activitytracker
 
 
 import android.app.Application
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.view.View
-import android.widget.Button
+import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper.getMainLooper
+import android.os.SystemClock
+import android.util.Log
+import android.widget.Chronometer
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
-
+import androidx.lifecycle.*
 import com.example.workingdog.R
 import com.example.workingdog.database.ActivityDatabaseDao
 import com.example.workingdog.database.TimeTrack
-import kotlinx.android.synthetic.main.fragment_activity_tracker.view.*
-
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 import java.util.*
 
 
@@ -26,10 +25,35 @@ import java.util.*
  * ViewModel for ActivityTrackerFragment.
  */
 class ActivityTrackerViewModel(
-    val database: ActivityDatabaseDao, application: Application) : AndroidViewModel(application) {
+    val database: ActivityDatabaseDao, application: Application
+) : AndroidViewModel(application) {
 
-    var startTracking = true
-    var todayTimeA = 0.0
+
+    companion object {
+        // These represent different important times
+        // This is when the game is over
+        const val DONE = 0L
+        // This is the number of milliseconds in a second
+        const val ONE_SECOND = 1000L
+        // This is the total time of the game
+        const val COUNTDOWN_TIME = 60000L
+    }
+    private var startTracking = true
+
+
+
+    private val timer: CountDownTimer
+
+     var todayTimeA  = 0.0
+
+    private var _buttonText =  MutableLiveData<String>()
+    val buttonText : LiveData<String>
+        get()=_buttonText
+
+    private val _imagePics = MutableLiveData<Drawable>()
+    val imagePics: LiveData<Drawable>
+        get() = _imagePics
+
 
 
 
@@ -48,22 +72,45 @@ class ActivityTrackerViewModel(
 //        val dayTime = Transformations.map(days) { days ->
 //        updateDay(days)
 //    }
-    fun updateBtnText(){
+    private fun updateBtnText(){
         if(startTracking)
-            buttonText = "Stop"
+
+            _buttonText.value = "Start"
         else
-            buttonText = "Start"
+            _buttonText.value = "Stop"
     }
 
-    var buttonText = "Start"
+
 
     init {
         initializeToday()
+        updateBtnText()
+
+        timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                todayTimeA +=(millisUntilFinished/1000.0/60/60)
+
+//                if (todayTimeA > 4)
+//                    _imagePics.value = R.drawable.stillworking
+//                else if (todayTimeA > 6)
+//                    _imagePics.value = R.drawable.needanap
+//                else if(todayTimeA!! > 8)
+//                    _imagePics.value = R.drawable.workighard
+
+            }
+
+            override fun onFinish() {
+                // TODO implement what should happen when the timer finishes
+            }
+        }
+
     }
 
     private fun initializeToday() {
         viewModelScope.launch {
             today.value = getTodayFromDatabase()
+            setTodayTimeVal()
         }
     }
 
@@ -98,27 +145,27 @@ class ActivityTrackerViewModel(
      * Executes when the START button is clicked.
      */
     fun startStopTracking(){
-        if (startTracking) {
+        if (startTracking)
             onStartTracking()
-
-        }
-        else{
+        else
             onStopTracking()
-            startTracking = true }
+
 
     }
 
 
 
-    fun onStartTracking() {
+    private fun onStartTracking() {
         viewModelScope.launch {
             // Create a new day, which captures the current time,
             // and insert it into the database.
 
             startTracking = false
+            updateBtnText()
             val newDay = TimeTrack()
             insert(newDay)
             today.value = getTodayFromDatabase()
+            timer.start()
         }
     }
 
@@ -126,35 +173,54 @@ class ActivityTrackerViewModel(
     /**
      * Executes when the STOP button is clicked.
      */
-    fun onStopTracking() {
+    private fun onStopTracking() {
         viewModelScope.launch {
             // In Kotlin, the return@label syntax is used for specifying which function among
             // several nested ones this statement returns from.
             // In this case, we are specifying to return from launch(),
             // not the lambda.
+            timer.cancel()
+            startTracking = true
+            updateBtnText()
+
             val oldDay = today.value ?: return@launch
 
             // Update the day in the database to add the end time.
             oldDay.endTimeMilli = Calendar.getInstance()
-
-            val todayStart = Calendar.getInstance()
-            todayStart.set(Calendar.HOUR_OF_DAY, 6)
-            val tomorrowStart = Calendar.getInstance()
-            tomorrowStart.set(Calendar.DATE, tomorrowStart.get(Calendar.DATE + 1))
-            tomorrowStart.set(Calendar.HOUR_OF_DAY, 6)
-
+           // _imagePics.value = R.drawable.letsdothis
+            if(todayTimeA > 8)
+           // _imagePics.value = R.drawable.timetorest
             update(oldDay)
-
-            todayTimeA = database.getAllByDate(todayStart, tomorrowStart)!!
-            println(todayTimeA / 1000 / 60 / 60)
+            setTodayTimeVal()
 
         }
     }
+
+    suspend fun setTodayTimeVal(){
+        val todayStart = Calendar.getInstance()
+        todayStart.set(Calendar.HOUR_OF_DAY, 6)
+        val tomorrowStart = Calendar.getInstance()
+        tomorrowStart.set(Calendar.DATE, tomorrowStart.get(Calendar.DATE + 1))
+        tomorrowStart.set(Calendar.HOUR_OF_DAY, 6)
+
+
+        todayTimeA = database.getAllByDate(todayStart, tomorrowStart)!!
+        todayTimeA = todayTimeA/1000/60/60
+
+    }
+
+
+
     var dogstat = R.drawable.stillworking
     @BindingAdapter("android:src")
     fun setImageDrawable(view: ImageView, drawable: Drawable?) {
 
         view.setImageDrawable(drawable)
+    }
+
+    @BindingAdapter("android:src")
+    fun setImageResource(imageView: ImageView, resource: Int) {
+        imageView.setImageResource(resource)
     }
 
     /**
