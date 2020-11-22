@@ -89,9 +89,7 @@ class ActivityTrackerViewModel(
         timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
 
             override fun onTick(millisUntilFinished: Long) {
-                todayTimeA +=(millisUntilFinished/100.0/60/60)
-                Log.d("Total Timerr:", ""+(millisUntilFinished/100.0/60/60))
-                Log.d("Total Time:", ""+todayTimeA)
+                todayTimeA +=(millisUntilFinished/1000.0/60/60)
 
 //                if (todayTimeA > 4)
 //                    _imagePics.value = R.drawable.stillworking
@@ -208,9 +206,7 @@ class ActivityTrackerViewModel(
 
         todayTimeA = database.getAllByDate(todayStart, tomorrowStart)!!
         todayTimeA = todayTimeA/1000/60/60
-        println(todayStart)
-        println(tomorrowStart)
-        println(todayTimeA)
+
     }
 
 
