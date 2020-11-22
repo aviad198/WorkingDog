@@ -1,13 +1,8 @@
-package com.example.workingdog
+package com.example.workingdog.activitytracker
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
-import android.os.Build
-import android.text.Html
-import android.text.Spanned
-import androidx.core.text.HtmlCompat
-import com.example.workingdog.database.TimeTrack
-import java.sql.Time
+import com.example.workingdog.R
 import java.text.SimpleDateFormat
 import java.util.*
 

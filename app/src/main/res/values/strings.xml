@@ -80,4 +80,5 @@
     <string name="startWork">Start work</string>
     <string name="stopWork">Stop work</string>
     <string name="fwf">hello</string>
+    <string name="dogImageExplain" />
 </resources>

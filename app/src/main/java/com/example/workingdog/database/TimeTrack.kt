@@ -1,12 +1,6 @@
 package com.example.workingdog.database
 
 import androidx.room.*
-import com.example.workingdog.convertLongToDateOnlyString
-import com.example.workingdog.convertLongToDateString
-import java.sql.Date
-import java.sql.Timestamp
-import java.time.*
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 

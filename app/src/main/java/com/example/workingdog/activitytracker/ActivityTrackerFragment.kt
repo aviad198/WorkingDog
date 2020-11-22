@@ -1,5 +1,6 @@
 package com.example.workingdog.activitytracker
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.example.workingdog.R
 import com.example.workingdog.database.ActivityDatabase
 import com.example.workingdog.databinding.ActivityMainBinding
 import com.example.workingdog.databinding.FragmentActivityTrackerBinding
+import kotlinx.android.synthetic.main.fragment_activity_tracker.*
 import java.util.*
 
 
@@ -46,16 +48,19 @@ class ActivityTrackerFragment : Fragment() {
             ViewModelProvider(
                 this, viewModelFactory).get(ActivityTrackerViewModel::class.java)
 
+
+
         // To use the View Model with data binding, you have to explicitly
         // give the binding object a reference to it.
         binding.activityTrackerViewModel = activityTrackerViewModel
+        binding.TimeBtn.setOnClickListener {
+            if (activityTrackerViewModel.startTracking)
+                binding.TimeBtn.text = "Start"
+            else
+                binding.TimeBtn.text = "Stop"
+        }
         binding.lifecycleOwner = this
 
-        val todayStart = Calendar.getInstance()
-        todayStart.set(3,0)
-        todayStart.set(4,0)
-        todayStart.set(5,0)
-        Log.i("today start", todayStart.toString())
         return binding.root
     }
 }

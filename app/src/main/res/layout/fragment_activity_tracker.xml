@@ -16,7 +16,7 @@ xmlns:tools="http://schemas.android.com/tools">
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_dark"
+    android:background="@color/colorApp"
     tools:context=".MainActivity">
 
 
@@ -31,13 +31,24 @@ xmlns:tools="http://schemas.android.com/tools">
         android:text="@string/StartStop"
         android:textColor="@color/black"
         android:background="@drawable/rounded_corners"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.109" />
 
+
+    <ImageView
+        android:id="@+id/DogStatus"
+        android:layout_width="264dp"
+        android:layout_height="265dp"
+        android:contentDescription="@string/dogImageExplain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@{activityTrackerViewModel.setImageDrawable()" />
 <!--    <TextView-->
 <!--        android:id="@+id/textView"-->
 <!--        android:layout_width="272dp"-->

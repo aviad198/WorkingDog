@@ -4,36 +4,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/activity_tracker_fragment">
-
+    app:startDestination="@id/welcomeFragment">
     <fragment
-        android:id="@+id/activity_tracker_fragment"
-        android:name="com.example.workingdog.activitytracker.ActivityTrackerFragment"
-        android:label="@string/activity_tracker_fragment"
-        tools:layout="@layout/fragment_activity_tracker">
-<!--        <action-->
-<!--            android:id="@+id/action_sleepTrackerFragment_to_sleepQualityFragment"-->
-<!--            app:destination="@id/sleep_quality_fragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:popEnterAnim="@anim/slide_in_right" />-->
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.workingdog.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_getToKnowFragment2"
+            app:destination="@id/getToKnowFragment2"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/getToKnowFragment2"
+            app:popUpToInclusive="true" />
     </fragment>
-
-
-    <!--    <fragment-->
-<!--        android:id="@+id/sleep_quality_fragment"-->
-<!--        android:name="com.example.android.trackmysleepquality.sleepquality.SleepQualityFragment"-->
-<!--        android:label="@string/sleep_quality_fragment"-->
-<!--        tools:layout="@layout/fragment_sleep_quality">-->
-<!--        <argument-->
-<!--            android:name="sleepNightKey"-->
-<!--            app:argType="long" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_sleepQualityFragment_to_sleepTrackerFragment"-->
-<!--            app:destination="@id/sleep_tracker_fragment"-->
-<!--            app:launchSingleTop="false"-->
-<!--            app:popUpTo="@+id/sleep_tracker_fragment"-->
-<!--            app:popUpToInclusive="true" />-->
-<!--    </fragment>-->
-
-
+    <fragment
+        android:id="@+id/getToKnowFragment2"
+        android:name="com.example.workingdog.GetToKnowFragment"
+        android:label="GetToKnowFragment" >
+        <action
+            android:id="@+id/action_getToKnowFragment2_to_activityTrackerFragment"
+            app:destination="@id/activityTrackerFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/activityTrackerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/activityTrackerFragment"
+        android:name="com.example.workingdog.activitytracker.ActivityTrackerFragment"
+        android:label="ActivityTrackerFragment" />
 </navigation>
