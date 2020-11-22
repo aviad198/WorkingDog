@@ -2,15 +2,10 @@ package com.example.workingdog.activitytracker
 
 
 import android.app.Application
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
+
 import android.graphics.drawable.Drawable
 import android.os.CountDownTimer
-import android.os.Handler
-import android.os.Looper.getMainLooper
-import android.os.SystemClock
-import android.util.Log
-import android.widget.Chronometer
+
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
@@ -203,7 +198,7 @@ class ActivityTrackerViewModel(
         tomorrowStart.set(Calendar.DATE, tomorrowStart.get(Calendar.DATE + 1))
         tomorrowStart.set(Calendar.HOUR_OF_DAY, 6)
 
-
+    if (database.getAllByDate(todayStart, tomorrowStart) != null )
         todayTimeA = database.getAllByDate(todayStart, tomorrowStart)!!
         todayTimeA = todayTimeA/1000/60/60
 

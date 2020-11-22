@@ -72,6 +72,6 @@ interface ActivityDatabaseDao {
 //    fun getTodayRecord(): Long
 
     @Query("SELECT SUM(end_time-start_time) FROM daily_activity_time_table WHERE start_time BETWEEN :from AND :to")
-    suspend fun getAllByDate(from: Calendar,to: Calendar): Double
+    suspend fun getAllByDate(from: Calendar,to: Calendar): Double?
 
 }
