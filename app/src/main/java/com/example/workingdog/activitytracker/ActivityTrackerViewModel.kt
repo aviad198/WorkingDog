@@ -48,7 +48,14 @@ class ActivityTrackerViewModel(
 //        val dayTime = Transformations.map(days) { days ->
 //        updateDay(days)
 //    }
+    fun updateBtnText(){
+        if(startTracking)
+            buttonText = "Stop"
+        else
+            buttonText = "Start"
+    }
 
+    var buttonText = "Start"
 
     init {
         initializeToday()
@@ -92,7 +99,6 @@ class ActivityTrackerViewModel(
      */
     fun startStopTracking(){
         if (startTracking) {
-
             onStartTracking()
 
         }
@@ -100,7 +106,6 @@ class ActivityTrackerViewModel(
             onStopTracking()
             startTracking = true }
 
-      //  Log.i("Day time is:", ""+dayTime)
     }
 
 

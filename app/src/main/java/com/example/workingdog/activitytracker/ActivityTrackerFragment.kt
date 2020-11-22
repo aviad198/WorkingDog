@@ -29,13 +29,16 @@ class ActivityTrackerFragment : Fragment() {
      *
      * This function uses DataBindingUtil to inflate R.layout.fragment_activity_quality.
      */
+    private lateinit var binding: FragmentActivityTrackerBinding
+
+    private lateinit var viewModel: ActivityTrackerViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
 
         // Get a reference to the binding object and inflate the fragment views.
-        val binding: FragmentActivityTrackerBinding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_activity_tracker, container, false)
 
         val application = requireNotNull(this.activity).application
@@ -44,7 +47,7 @@ class ActivityTrackerFragment : Fragment() {
         val viewModelFactory = ActivityTrackerViewModelFactory(dataSource, application)
         // Get a reference to the ViewModel associated with this fragment.
 
-        val activityTrackerViewModel =
+        viewModel =
             ViewModelProvider(
                 this, viewModelFactory).get(ActivityTrackerViewModel::class.java)
 
@@ -52,15 +55,19 @@ class ActivityTrackerFragment : Fragment() {
 
         // To use the View Model with data binding, you have to explicitly
         // give the binding object a reference to it.
-        binding.activityTrackerViewModel = activityTrackerViewModel
+     //   binding.activityTrackerViewModel = activityTrackerViewModel
+        binding.TimeBtn.text = viewModel.buttonText
         binding.TimeBtn.setOnClickListener {
-            if (activityTrackerViewModel.startTracking)
-                binding.TimeBtn.text = "Start"
-            else
-                binding.TimeBtn.text = "Stop"
+            viewModel.startStopTracking()
+            viewModel.updateBtnText()
+            updateBtnText()
         }
         binding.lifecycleOwner = this
 
         return binding.root
+    }
+
+    private fun updateBtnText(){
+        binding.TimeBtn.text = viewModel.buttonText
     }
 }
