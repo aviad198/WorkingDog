@@ -56,27 +56,23 @@ class ActivityTrackerFragment : Fragment() {
         // To use the View Model with data binding, you have to explicitly
         // give the binding object a reference to it.
      //   binding.activityTrackerViewModel = activityTrackerViewModel
-        binding.TimeBtn.text = viewModel.buttonText
-        binding.TimeBtn.setOnClickListener {
-            viewModel.startStopTracking()
-            viewModel.updateBtnText()
-            updateBtnText()
-        }
-        binding.lifecycleOwner = this
+
+        binding.DogStatus.setImageResource(R.drawable.letsdothis)
 
         setHasOptionsMenu(true)
-        return binding.root
-    }
 
-    private fun updateBtnText(){
-        binding.TimeBtn.text = viewModel.buttonText
+
+        binding.lifecycleOwner = this
+
+        binding.activityTrackerViewModel = viewModel
+        return binding.root
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.overflow_menu, menu)
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item!!, view!!.findNavController()) || super.onOptionsItemSelected(item)
+        inflater.inflate(R.menu.overflow_menu, menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
+    }
 }

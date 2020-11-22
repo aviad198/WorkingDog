@@ -27,10 +27,10 @@ xmlns:tools="http://schemas.android.com/tools">
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
-
-
+        android:onClick="@{() -> activityTrackerViewModel.startStopTracking()}"
         android:textColor="@color/black"
         android:background="@drawable/rounded_corners"
+        android:text="@{activityTrackerViewModel.buttonText}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@ xmlns:tools="http://schemas.android.com/tools">
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@{activityTrackerViewModel.setImageDrawable()" />
+        tools:srcCompat="@{activityTrackerViewModel.imagePics" />
 <!--    <TextView-->
 <!--        android:id="@+id/textView"-->
 <!--        android:layout_width="272dp"-->
