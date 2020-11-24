@@ -32,9 +32,9 @@ class ActivityTrackerFragment : Fragment() {
 
     private lateinit var viewModel: ActivityTrackerViewModel
     //Buzzers
-    private val FIRST_BUZZ_PATTERN = longArrayOf(0, 100)
-    private val SECOND_BUZZ_PATTERN = longArrayOf(0, 200)
-    private val THIRD_BUZZ_PATTERN = longArrayOf(0, 100,200)
+    private val FIRST_BUZZ_PATTERN = longArrayOf(0, 100, 100)
+    private val SECOND_BUZZ_PATTERN = longArrayOf(0, 100, 200)
+    private val THIRD_BUZZ_PATTERN = longArrayOf(0, 100, 300)
     private val FOURTH_BUZZ_PATTERN = longArrayOf(0,2000)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -58,46 +58,18 @@ class ActivityTrackerFragment : Fragment() {
 
         //Add some buzzing
         viewModel.todayTimeA.observe(viewLifecycleOwner, Observer { newTime ->
-             if (newTime!= null){
+            if (newTime!= null) {
+                updateFrag(newTime)
+            }
 
-             binding.dayProgress.progress = newTime.toInt()
-                 binding.todayTime.text = ((newTime * 10.0).roundToInt() / 10.0).toString()
-                 if (newTime < 4)
-                     binding.DogStatus.setImageResource(R.drawable.letsdothis)
-                 if (newTime > 4){
-                     binding.DogStatus.setImageResource(R.drawable.stillworking)
-                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                         activity?.getSystemService<Vibrator>()
-                             ?.vibrate(VibrationEffect.createWaveform(FIRST_BUZZ_PATTERN, -1))
-                     } }
-                 if (newTime > 6){
-                     binding.DogStatus.setImageResource(R.drawable.timetorest)
-                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                     activity?.getSystemService<Vibrator>()
-                         ?.vibrate(VibrationEffect.createWaveform(SECOND_BUZZ_PATTERN, -1))
-                 } }
-                 if (newTime > 8){
-                     binding.DogStatus.setImageResource(R.drawable.letsstrech)
-                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                     activity?.getSystemService<Vibrator>()
-                         ?.vibrate(VibrationEffect.createWaveform(THIRD_BUZZ_PATTERN, -1))
-                 } }
-                 if (newTime > 10){
-                     binding.DogStatus.setImageResource(R.drawable.workighard)
-                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                     activity?.getSystemService<Vibrator>()
-                         ?.vibrate(VibrationEffect.createWaveform(FOURTH_BUZZ_PATTERN, -1))
-                 } }
-             }
-
-    })
+        })
         // To use the View Model with data binding, you have to explicitly
         // give the binding object a reference to it.
-     //   binding.activityTrackerViewModel = activityTrackerViewModel
+        //   binding.activityTrackerViewModel = activityTrackerViewModel
 
-
-
-
+        fun initPic(){
+            binding.DogStatus.setImageResource(R.drawable.letsdothis)
+        }
 
         binding.lifecycleOwner = this
 
@@ -105,4 +77,39 @@ class ActivityTrackerFragment : Fragment() {
         return binding.root
     }
 
+    var done = false
+    private fun updateFrag(newTime: Double){
+        //  binding.dayProgress.progress = newTime.toInt()
+        binding.todayTime.text = ((newTime * 10.0).roundToInt() / 10.0).toString()
+        if (newTime < 4)
+            binding.DogStatus.setImageResource(R.drawable.letsdothis)
+        if (newTime > 4 && newTime <6 && !done){
+            binding.DogStatus.setImageResource(R.drawable.stillworking)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activity?.getSystemService<Vibrator>()
+                    ?.vibrate(VibrationEffect.createWaveform(FIRST_BUZZ_PATTERN, -1))
+                done =true
+            } }
+        if (newTime > 6 && newTime <8 && done){
+            binding.DogStatus.setImageResource(R.drawable.timetorest)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activity?.getSystemService<Vibrator>()
+                    ?.vibrate(VibrationEffect.createWaveform(SECOND_BUZZ_PATTERN, -1))
+                done=false
+            } }
+        if (newTime > 8 && newTime <10 && !done){
+            binding.DogStatus.setImageResource(R.drawable.letsstrech)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activity?.getSystemService<Vibrator>()
+                    ?.vibrate(VibrationEffect.createWaveform(THIRD_BUZZ_PATTERN, -1))
+                done = true
+            } }
+        if (newTime > 10 && done){
+            binding.DogStatus.setImageResource(R.drawable.workighard)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activity?.getSystemService<Vibrator>()
+                    ?.vibrate(VibrationEffect.createWaveform(FOURTH_BUZZ_PATTERN, -1))
+                done = false
+            } }
+    }
 }

@@ -40,7 +40,7 @@ class ActivityTrackerViewModel(
 
     private val timer: CountDownTimer
 
-     var todayTimeA  = MutableLiveData<Double>()
+    var todayTimeA  = MutableLiveData<Double>()
 
     private var _buttonText =  MutableLiveData<String>()
     val buttonText : LiveData<String>
@@ -113,12 +113,12 @@ need to fix timer so it wont stop, try to find better implement for time
      *  recording.
      */
     private suspend fun getTodayFromDatabase(): TimeTrack? {
-            var today = database.getToday()
-            if (today?.endTimeMilli != today?.startTimeMilli) {
-                today = null
-            }
-            return today
+        var today = database.getToday()
+        if (today?.endTimeMilli != today?.startTimeMilli) {
+            today = null
         }
+        return today
+    }
 
     private suspend fun clear() {
         database.clear()
@@ -178,11 +178,9 @@ need to fix timer so it wont stop, try to find better implement for time
 
             val oldDay = today.value ?: return@launch
 
-            // Update the day in the database to add the end time.
+
             oldDay.endTimeMilli = Calendar.getInstance()
-           // _imagePics.value = R.drawable.letsdothis
-          //  if(todayTimeA > 8)
-           // _imagePics.value = R.drawable.timetorest
+
             update(oldDay)
             setTodayTimeVal()
 
@@ -196,17 +194,16 @@ need to fix timer so it wont stop, try to find better implement for time
         tomorrowStart.set(Calendar.DATE, tomorrowStart.get(Calendar.DATE + 1))
         tomorrowStart.set(Calendar.HOUR_OF_DAY, 6)
 
-    if (database.getAllByDate(todayStart, tomorrowStart) != null ){
-        todayTimeA.value = database.getAllByDate(todayStart, tomorrowStart)
-        todayTimeA.value =  (todayTimeA.value?.div((1000/60/60)))}
+        if (database.getAllByDate(todayStart, tomorrowStart) != null ){
+            todayTimeA.value = todayTimeA.value?.plus(database.getAllByDate(todayStart, tomorrowStart)!! /1000.0/60.0/60.0)
+        }
         else
-        todayTimeA.value = 0.0
+            todayTimeA.value = 0.0
 
     }
 
 
 
-    var dogstat = R.drawable.stillworking
 
 
     /**

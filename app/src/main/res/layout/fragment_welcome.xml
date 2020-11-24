@@ -24,15 +24,14 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="100dp"
             android:fontFamily="@font/roboto"
             android:text="@string/titleWelcome"
             android:textAlignment="center"
             android:textColor="#0B4325"
             android:textSize="35sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,34 +48,26 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleWelcome"
-            app:layout_constraintVertical_bias="0.078" />
+            app:layout_constraintTop_toBottomOf="@+id/titleWelcome" />
 
         <ImageView
             android:id="@+id/imageLetsDoThis"
-            android:layout_width="318dp"
-            android:layout_height="222dp"
+            android:layout_width="313dp"
+            android:layout_height="261dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="348dp"
             android:adjustViewBounds="false"
             android:contentDescription="@string/welcomingDog"
             android:cropToPadding="false"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/summaryApp"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/emptydog" />
 
         <Button
@@ -86,16 +77,28 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="260dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="224dp"
             android:background="@drawable/rounded_corners"
             android:text="@string/LetsGetStarted"
             android:textColor="@color/black"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/summaryApp" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.904" />
+
+        <ImageView
+            android:id="@+id/welcomsymbol"
+            android:layout_width="344dp"
+            android:layout_height="103dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/appSymbol"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/signtransparent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
