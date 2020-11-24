@@ -5,6 +5,7 @@ import android.app.Application
 
 import android.graphics.drawable.Drawable
 import android.os.CountDownTimer
+import android.util.Log
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -31,7 +32,7 @@ class ActivityTrackerViewModel(
         // This is the number of milliseconds in a second
         const val ONE_SECOND = 1000L
         // This is the total time of the game
-        const val COUNTDOWN_TIME = 60000L
+        var COUNTDOWN_TIME = 60000L
     }
     private var startTracking = true
 
@@ -39,15 +40,11 @@ class ActivityTrackerViewModel(
 
     private val timer: CountDownTimer
 
-     var todayTimeA  = 0.0
+     var todayTimeA  = MutableLiveData<Double>()
 
     private var _buttonText =  MutableLiveData<String>()
     val buttonText : LiveData<String>
         get()=_buttonText
-
-    private val _imagePics = MutableLiveData<Drawable>()
-    val imagePics: LiveData<Drawable>
-        get() = _imagePics
 
 
 
@@ -78,21 +75,19 @@ class ActivityTrackerViewModel(
 
 
     init {
+        todayTimeA.value= 0.0
         initializeToday()
         updateBtnText()
-
+/*
+need to fix timer so it wont stop, try to find better implement for time
+ */
         timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
 
             override fun onTick(millisUntilFinished: Long) {
-                todayTimeA +=(millisUntilFinished/1000.0/60/60)
-
-//                if (todayTimeA > 4)
-//                    _imagePics.value = R.drawable.stillworking
-//                else if (todayTimeA > 6)
-//                    _imagePics.value = R.drawable.needanap
-//                else if(todayTimeA!! > 8)
-//                    _imagePics.value = R.drawable.workighard
-
+                //faster then a second for testing
+                todayTimeA.value= todayTimeA.value?.plus((millisUntilFinished/50.0/60/60))
+                Log.i("time", todayTimeA.value.toString())
+                COUNTDOWN_TIME++
             }
 
             override fun onFinish() {
@@ -105,6 +100,7 @@ class ActivityTrackerViewModel(
     private fun initializeToday() {
         viewModelScope.launch {
             today.value = getTodayFromDatabase()
+            //_imagePics.value = R.drawable.letsdothis
             setTodayTimeVal()
         }
     }
@@ -150,6 +146,8 @@ class ActivityTrackerViewModel(
 
 
 
+
+
     private fun onStartTracking() {
         viewModelScope.launch {
             // Create a new day, which captures the current time,
@@ -183,7 +181,7 @@ class ActivityTrackerViewModel(
             // Update the day in the database to add the end time.
             oldDay.endTimeMilli = Calendar.getInstance()
            // _imagePics.value = R.drawable.letsdothis
-            if(todayTimeA > 8)
+          //  if(todayTimeA > 8)
            // _imagePics.value = R.drawable.timetorest
             update(oldDay)
             setTodayTimeVal()
@@ -198,25 +196,18 @@ class ActivityTrackerViewModel(
         tomorrowStart.set(Calendar.DATE, tomorrowStart.get(Calendar.DATE + 1))
         tomorrowStart.set(Calendar.HOUR_OF_DAY, 6)
 
-    if (database.getAllByDate(todayStart, tomorrowStart) != null )
-        todayTimeA = database.getAllByDate(todayStart, tomorrowStart)!!
-        todayTimeA = todayTimeA/1000/60/60
+    if (database.getAllByDate(todayStart, tomorrowStart) != null ){
+        todayTimeA.value = database.getAllByDate(todayStart, tomorrowStart)
+        todayTimeA.value =  (todayTimeA.value?.div((1000/60/60)))}
+        else
+        todayTimeA.value = 0.0
 
     }
 
 
 
     var dogstat = R.drawable.stillworking
-    @BindingAdapter("android:src")
-    fun setImageDrawable(view: ImageView, drawable: Drawable?) {
 
-        view.setImageDrawable(drawable)
-    }
-
-    @BindingAdapter("android:src")
-    fun setImageResource(imageView: ImageView, resource: Int) {
-        imageView.setImageResource(resource)
-    }
 
     /**
      * Executes when the CLEAR button is clicked.
@@ -224,6 +215,7 @@ class ActivityTrackerViewModel(
     fun onClear() {
         viewModelScope.launch {
             clear()
+            todayTimeA.value= 0.0
             today.value = null
         }
     }

@@ -12,7 +12,9 @@
         <!-- android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" > -->
         <!-- <activity android:name=".MainActivity"></activity> -->
         <!-- <activity android:name=".HomeActivity2"></activity> -->
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -2,6 +2,10 @@ package com.example.workingdog.activitytracker
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
+import android.graphics.drawable.Drawable
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
 import com.example.workingdog.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -46,7 +50,16 @@ fun convertLongToDateString(systemTime: Long): String {
 fun convertLongToDateOnlyString(systemTime: Long): Date {
     return Date(systemTime)
 }
+@BindingAdapter("android:src")
+fun setImageDrawable(view: ImageView, drawable: Drawable?) {
 
+    view.setImageDrawable(drawable)
+}
+
+@BindingAdapter("android:src")
+fun setImageResource(imageView: ImageView, resource: LiveData<Int>) {
+    imageView.setImageResource(resource.hashCode())
+}
 //
 //fun updateDay(days: List<TimeTrack>): Double{
 //    val todayTime =0.0;

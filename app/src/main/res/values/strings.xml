@@ -83,4 +83,8 @@
     <string name="dogImageExplain" />
     <string name="about">About</string>
     <string name="todo">TODO</string>
+    <string name="welcomingDog">welcoming dof</string>
+    <string name="Start">start</string>
+    <string name="init">0</string>
+    <string name="Clear">Clear</string>
 </resources>

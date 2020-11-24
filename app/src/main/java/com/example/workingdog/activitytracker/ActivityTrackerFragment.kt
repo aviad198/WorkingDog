@@ -1,20 +1,19 @@
 package com.example.workingdog.activitytracker
 
-import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.*
+import androidx.core.content.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.example.workingdog.R
 import com.example.workingdog.database.ActivityDatabase
-import com.example.workingdog.databinding.ActivityMainBinding
 import com.example.workingdog.databinding.FragmentActivityTrackerBinding
-import kotlinx.android.synthetic.main.fragment_activity_tracker.*
-import java.util.*
+import kotlin.math.roundToInt
 
 
 /**
@@ -32,9 +31,15 @@ class ActivityTrackerFragment : Fragment() {
     private lateinit var binding: FragmentActivityTrackerBinding
 
     private lateinit var viewModel: ActivityTrackerViewModel
+    //Buzzers
+    private val FIRST_BUZZ_PATTERN = longArrayOf(0, 100)
+    private val SECOND_BUZZ_PATTERN = longArrayOf(0, 200)
+    private val THIRD_BUZZ_PATTERN = longArrayOf(0, 100,200)
+    private val FOURTH_BUZZ_PATTERN = longArrayOf(0,2000)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
 
 
         // Get a reference to the binding object and inflate the fragment views.
@@ -51,15 +56,47 @@ class ActivityTrackerFragment : Fragment() {
             ViewModelProvider(
                 this, viewModelFactory).get(ActivityTrackerViewModel::class.java)
 
+        //Add some buzzing
+        viewModel.todayTimeA.observe(viewLifecycleOwner, Observer { newTime ->
+             if (newTime!= null){
 
+             binding.dayProgress.progress = newTime.toInt()
+                 binding.todayTime.text = ((newTime * 10.0).roundToInt() / 10.0).toString()
+                 if (newTime < 4)
+                     binding.DogStatus.setImageResource(R.drawable.letsdothis)
+                 if (newTime > 4){
+                     binding.DogStatus.setImageResource(R.drawable.stillworking)
+                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                         activity?.getSystemService<Vibrator>()
+                             ?.vibrate(VibrationEffect.createWaveform(FIRST_BUZZ_PATTERN, -1))
+                     } }
+                 if (newTime > 6){
+                     binding.DogStatus.setImageResource(R.drawable.timetorest)
+                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                     activity?.getSystemService<Vibrator>()
+                         ?.vibrate(VibrationEffect.createWaveform(SECOND_BUZZ_PATTERN, -1))
+                 } }
+                 if (newTime > 8){
+                     binding.DogStatus.setImageResource(R.drawable.letsstrech)
+                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                     activity?.getSystemService<Vibrator>()
+                         ?.vibrate(VibrationEffect.createWaveform(THIRD_BUZZ_PATTERN, -1))
+                 } }
+                 if (newTime > 10){
+                     binding.DogStatus.setImageResource(R.drawable.workighard)
+                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                     activity?.getSystemService<Vibrator>()
+                         ?.vibrate(VibrationEffect.createWaveform(FOURTH_BUZZ_PATTERN, -1))
+                 } }
+             }
 
+    })
         // To use the View Model with data binding, you have to explicitly
         // give the binding object a reference to it.
      //   binding.activityTrackerViewModel = activityTrackerViewModel
 
-        binding.DogStatus.setImageResource(R.drawable.letsdothis)
 
-        setHasOptionsMenu(true)
+
 
 
         binding.lifecycleOwner = this
@@ -67,12 +104,5 @@ class ActivityTrackerFragment : Fragment() {
         binding.activityTrackerViewModel = viewModel
         return binding.root
     }
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.overflow_menu, menu)
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
-    }
 }
