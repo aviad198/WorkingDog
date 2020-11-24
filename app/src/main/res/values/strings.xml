@@ -76,4 +76,5 @@
     <string name="Clear">Clear</string>
     <string name="hwtoday">Hours worked today:</string>
     <string name="appSymbol">the symbol of app</string>
+    <string name="sleepTime">how many hours do you sleep?</string>
 </resources>

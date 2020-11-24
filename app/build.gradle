@@ -69,15 +69,15 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     kapt "androidx.room:room-compiler:$version_room"
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
-    kapt 'androidx.room:room-compiler:2.0.0'
+    kapt 'androidx.room:room-compiler:2.2.5'
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutine"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutine"
 
     // Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0-rc02'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0-rc02'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle"
