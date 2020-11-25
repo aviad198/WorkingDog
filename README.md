@@ -35,4 +35,6 @@ This is just a short and uncomplete feature list:
 * Yoga/Physiotherapy/Eye practices
 * Export data in multiple formats (PDF, XLSX, CSV, direct print)
 
-## Screenshots(to be added)
+## Screenshots
+
+![](Screenshots/WelcomingScreen.jpeg)
