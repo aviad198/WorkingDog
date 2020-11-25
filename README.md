@@ -37,4 +37,13 @@ This is just a short and uncomplete feature list:
 
 ## Screenshots
 
+Opening Screen:
 ![](Screenshots/WelcomingScreen.jpeg)
+
+Perfrence Screen:
+![](Screenshots/PerfrencesScreen.jpeg)
+
+MainScreen:
+![](Screenshots/MainScreenLetsDoThis.jpeg)
+
+![](Screenshots/MainScreenWorkingHard.jpeg)
