@@ -40,10 +40,13 @@ This is just a short and uncomplete feature list:
 Opening Screen:
 ![](Screenshots/WelcomingScreen.jpeg)
 
+
 Perfrence Screen:
 ![](Screenshots/PerfrencesScreen.jpeg)
 
+
 MainScreen:
 ![](Screenshots/MainScreenLetsDoThis.jpeg)
+
 
 ![](Screenshots/MainScreenWorkingHard.jpeg)
